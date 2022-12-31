@@ -1,6 +1,7 @@
 #include <linklist.h>
 
-struct ListNode* swapPairs(struct ListNode* head) {
+struct ListNode* swapPairs(struct ListNode* head)
+{
     if (NULL == head || NULL == head->next)
         return head;
 
