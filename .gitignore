@@ -1,1 +1,4 @@
-*.dSYM*
+*.dSYM.*
+!/bin/**/\.gitkeep
+bin/**/*-solution*
+
