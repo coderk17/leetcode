@@ -1,9 +1,10 @@
-/*
+/**
  * @file solution.c
  * @author coderk17
  * @date 2023-01-01
+ * @brief Reverse Nodes in k-Group
  * 
- * @brief Given the head of a linked list, reverse the nodes of the list k at a time,
+ * Given the head of a linked list, reverse the nodes of the list k at a time,
  * and return the modified list.
  * 
  * k is a positive integer and is less than or equal to the length of the linked list.
