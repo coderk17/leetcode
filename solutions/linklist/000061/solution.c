@@ -13,29 +13,23 @@ struct ListNode* rotateRight(struct ListNode* head, int k)
 {
     if (NULL == head)
         return head;
-    int counter = 0;
-    struct ListNode *ptr = head;
+    int length = 1;
+    struct ListNode *last = head;
     struct ListNode *prev = head;
     struct ListNode *res = head;
-    while (ptr) {
-        ptr = ptr->next;
-        counter += 1;
+    while (last->next) {
+        last = last->next;
+        length += 1;
     }
-    k %= counter;
-    if (k == 0)
+    k = length - k % length;
+    if (k == length)
         return head;
-    ptr = head;
+    res = head;
     while (k--) {
-        ptr = ptr->next;
+        prev = res;
+        res = res->next;
     }
-    prev = head;
-    while (ptr->next)
-    {
-        ptr = ptr->next;
-        prev = prev->next;
-    }
-    res = prev->next;
-    ptr->next = head;
+    last->next = head;
     prev->next = NULL;
     return res;
 }
@@ -43,7 +37,7 @@ struct ListNode* rotateRight(struct ListNode* head, int k)
 int main(void)
 {
     int l1[] = {1, 2, 3, 4, 5};
-    int k = 5;
+    int k = 2;
     struct ListNode *p1 = init_llist(l1, sizeof(l1) / sizeof(int));
     print_llist(p1);
     struct ListNode * new_list = rotateRight(p1, k);
