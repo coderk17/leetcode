@@ -1,8 +1,8 @@
 /**
  * @file solution.c
  * @author coderk17
- * @date 2023-01-01
  * @brief Rotate List
+ * @date 2023-01-01
  * 
  * Given the head of a linked list, rotate the list to the right by k places.
  */
@@ -24,7 +24,6 @@ struct ListNode* rotateRight(struct ListNode* head, int k)
     k = length - k % length;
     if (k == length)
         return head;
-    res = head;
     while (k--) {
         prev = res;
         res = res->next;
