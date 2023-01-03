@@ -1,4 +1,4 @@
-#include <linklist.h>
+#include <llist.h>
 
 struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2) {
     struct ListNode res;
@@ -38,8 +38,8 @@ struct ListNode* mergeKLists(struct ListNode** lists, int listsSize) {
 
 /*
  * run command:
- * $ gcc ./solutions/linklist/000023/solution.c ./lib/linklist.c -o bin/linklist/000023-solution -I ./include
- * $ ./bin/linklist/000023-solution
+ * $ gcc ./solutions/llist/000023/solution.c ./lib/llist.c -o bin/llist/000023-solution -I ./include
+ * $ ./bin/llist/000023-solution
  */
 int main(void)
 {

@@ -1,4 +1,4 @@
-#include <linklist.h>
+#include <llist.h>
 
 struct ListNode* removeNthFromEnd(struct ListNode* head, int n) {
     struct ListNode *prev, *ptr;
@@ -17,8 +17,8 @@ struct ListNode* removeNthFromEnd(struct ListNode* head, int n) {
 
 /**
  * run command:
- * $ gcc ./solutions/linklist/000019/solution.c ./lib/linklist.c -o bin/linklist/000019-solution -I ./include
- * $ ./bin/linklist/000019-solution
+ * $ gcc ./solutions/llist/000019/solution.c ./lib/llist.c -o bin/llist/000019-solution -I ./include
+ * $ ./bin/llist/000019-solution
  */
 int main(void)
 {

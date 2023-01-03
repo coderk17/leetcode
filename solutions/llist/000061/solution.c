@@ -7,7 +7,7 @@
  * Given the head of a linked list, rotate the list to the right by k places.
  */
 
-#include <linklist.h>
+#include <llist.h>
 
 struct ListNode* rotateRight(struct ListNode* head, int k)
 {
@@ -35,8 +35,8 @@ struct ListNode* rotateRight(struct ListNode* head, int k)
 
 /*
  * run command:
- * $ gcc ./solutions/linklist/000061/solution.c ./lib/linklist.c -o bin/linklist/000061-solution -I ./include
- * $ ./bin/linklist/000061-solution
+ * $ gcc ./solutions/llist/000061/solution.c ./lib/llist.c -o bin/llist/000061-solution -I ./include
+ * $ ./bin/llist/000061-solution
  */
 int main(void)
 {

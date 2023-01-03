@@ -15,7 +15,7 @@
  * only nodes themselves may be changed.
  */
 
-#include <linklist.h>
+#include <llist.h>
 
 struct ListNode* reverse(struct ListNode* head)
 {
@@ -50,8 +50,8 @@ struct ListNode* reverseKGroup(struct ListNode* head, int k)
 
 /*
  * run command:
- * $ gcc ./solutions/linklist/000025/solution.c ./lib/linklist.c -o bin/linklist/000025-solution -I ./include
- * $ ./bin/linklist/000025-solution
+ * $ gcc ./solutions/llist/000025/solution.c ./lib/llist.c -o bin/llist/000025-solution -I ./include
+ * $ ./bin/llist/000025-solution
  */
 int main(void)
 {

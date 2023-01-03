@@ -1,4 +1,4 @@
-#include <linklist.h>
+#include <llist.h>
 
 struct ListNode* swapPairs(struct ListNode* head)
 {
@@ -14,8 +14,8 @@ struct ListNode* swapPairs(struct ListNode* head)
 
 /*
  * run command:
- * $ gcc ./solutions/linklist/000024/solution.c ./lib/linklist.c -o bin/linklist/000024-solution -I ./include
- * $ ./bin/linklist/000024-solution
+ * $ gcc ./solutions/llist/000024/solution.c ./lib/llist.c -o bin/llist/000024-solution -I ./include
+ * $ ./bin/llist/000024-solution
  */
 int main(void)
 {

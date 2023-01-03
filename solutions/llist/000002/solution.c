@@ -1,4 +1,4 @@
-#include <linklist.h>
+#include <llist.h>
 
 struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
     int carry = 0;
@@ -28,8 +28,8 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
 
 /*
  * run command:
- * $ gcc ./solutions/linklist/000002/solution.c ./lib/linklist.c -o bin/linklist/000002-solution -I ./include 
- * $ ./bin/linklist/000002-solution
+ * $ gcc ./solutions/llist/000002/solution.c ./lib/llist.c -o bin/llist/000002-solution -I ./include 
+ * $ ./bin/llist/000002-solution
  */
 int main(void)
 {

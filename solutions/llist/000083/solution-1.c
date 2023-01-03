@@ -8,7 +8,7 @@
  * each element appears only once. Return the linked list sorted as well.
  */
 
-#include <linklist.h>
+#include <llist.h>
 
 struct ListNode* deleteDuplicates(struct ListNode* head)
 {
@@ -32,8 +32,8 @@ struct ListNode* deleteDuplicates(struct ListNode* head)
 
 /*
  * run command:
- * $ gcc ./solutions/linklist/000083/solution-1.c ./lib/linklist.c -o bin/linklist/000083-solution-1 -I ./include
- * $ ./bin/linklist/000083-solution-1
+ * $ gcc ./solutions/llist/000083/solution-1.c ./lib/llist.c -o bin/llist/000083-solution-1 -I ./include
+ * $ ./bin/llist/000083-solution-1
  */
 int main(void)
 {
