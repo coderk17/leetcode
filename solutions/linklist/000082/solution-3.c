@@ -1,5 +1,5 @@
 /**
- * @file solution-1.c
+ * @file solution-3.c
  * @author coderk17
  * @brief Remove Duplicates from Sorted List II
  * @date 2023-01-01
@@ -12,31 +12,23 @@
 
 struct ListNode* deleteDuplicates(struct ListNode* head)
 {
-    if (NULL == head || NULL == head->next)
+    if (NULL == head)
         return head;
     struct ListNode dummy;
     dummy.next = head;
-    int max = head->val;
-    struct ListNode *pPrev = &dummy;
-    struct ListNode *ptr = &dummy;
-    for (int k = 0; k < 2; k++) {
-        ptr = ptr->next;
-    }
-    while (ptr) {
-        if (ptr->val == max) {
-            pPrev->next = NULL;
-        } else {
-            if (NULL == pPrev->next) {
-                pPrev->next = deleteDuplicates(ptr);
-                return dummy.next;
-            } else {
-                max = ptr->val;
-                pPrev = pPrev->next;
+    struct ListNode *cur = &dummy;
+    while (cur->next && cur->next->next) {
+        if (cur->next->val == cur->next->next->val) {
+            int max = cur->next->val;
+            while (cur->next && max == cur->next->val) {
+                cur->next = cur->next->next;
             }
         }
-        ptr = ptr->next;
+        else {
+            cur = cur->next;
+        }
     }
-    return dummy.next; 
+    return dummy.next;
 }
 
 int main(void)

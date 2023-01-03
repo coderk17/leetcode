@@ -1,5 +1,5 @@
 /**
- * @file solution.c
+ * @file solution-2.c
  * @author coderk17
  * @brief Remove Duplicates from Sorted List II
  * @date 2023-01-01
