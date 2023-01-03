@@ -33,6 +33,11 @@ struct ListNode* rotateRight(struct ListNode* head, int k)
     return res;
 }
 
+/*
+ * run command:
+ * $ gcc ./solutions/linklist/000061/solution.c ./lib/linklist.c -o bin/linklist/000061-solution -I ./include
+ * $ ./bin/linklist/000061-solution
+ */
 int main(void)
 {
     int l1[] = {1, 2, 3, 4, 5};

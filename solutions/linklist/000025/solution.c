@@ -48,6 +48,11 @@ struct ListNode* reverseKGroup(struct ListNode* head, int k)
     return prev;
 }
 
+/*
+ * run command:
+ * $ gcc ./solutions/linklist/000025/solution.c ./lib/linklist.c -o bin/linklist/000025-solution -I ./include
+ * $ ./bin/linklist/000025-solution
+ */
 int main(void)
 {
     int l1[] = {1, 2, 3, 4, 5};

@@ -31,6 +31,11 @@ struct ListNode* deleteDuplicates(struct ListNode* head)
     return dummy.next;
 }
 
+/*
+ * run command:
+ * $ gcc ./solutions/linklist/000082/solution-3.c ./lib/linklist.c -o bin/linklist/000082-solution-3 -I ./include
+ * $ ./bin/linklist/000082-solution-3
+ */
 int main(void)
 {
     int l1[] = {1, 2, 3, 3, 3, 3, 4, 4, 4, 5};
