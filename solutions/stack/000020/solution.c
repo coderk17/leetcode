@@ -41,27 +41,18 @@ bool isValid(char * s){
                 top++;
                 break;
             case ')':
-                if (top > 0 && *(stack + top - 1) == '(') {
-                    top--;
-                } else {
+                if (top == 0 || *(stack + --top) != '(')
                     return false;
-                }
                 break;
 
             case '}':
-                if (top > 0 && *(stack + top - 1) == '{') {
-                    top--;
-                } else {
+                if (top == 0 || *(stack + --top) != '{')
                     return false;
-                }
                 break;
 
             case ']':
-                if (top > 0 && *(stack + top - 1) == '[') {
-                    top--;
-                } else {
+                if (top == 0 || *(stack + --top) != '[')
                     return false;
-                }
                 break;
             default:
                 return false;
