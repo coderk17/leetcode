@@ -1,4 +1,4 @@
 *.dSYM.*
 !/bin/**/\.gitkeep
 bin/**/*-solution*
-
+.vscode
