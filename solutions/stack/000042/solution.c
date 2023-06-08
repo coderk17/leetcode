@@ -11,53 +11,29 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
-int trap(int* height, int heightSize){
-    if (heightSize <= 1)
+int trap(int* height, int heightSize) {
+    int n = heightSize;
+    if (n == 0) {
         return 0;
-    int top = -1, index = 0, stackSize = 10, res = 0;
-    int left = height[index];
-    int diff;
-    int* stack = (int*)malloc(sizeof(int) * stackSize);
-    while (index < heightSize - 1) {
-        diff = height[++index] - left;
-        if (diff >= 0) {
-            // 1. Calculate the difference between the height of the left and the height of each pillar
-            // in the stack and sum, then empty the stack.
-            while (top >= 0) {
-                res += (left - *(stack + top--));
+    }
+    int ans = 0;
+    int stk[n], top = 0;
+    for (int i = 0; i < n; ++i) {
+        while (top && height[i] > height[stk[top - 1]]) {
+            int stk_top = stk[--top];
+            if (!top) {
+                break;
             }
-            // 2. Reset left.
-            left = height[index];
-        } else {
-            // If right pillar is lower than left, push the height of right onto the stack.
-            if (++top >= stackSize) {
-                int *temp = NULL;
-                stackSize *= 2;
-                temp = (int*)realloc(stack, sizeof(int) * stackSize);
-                if (NULL == temp)
-                    return -1;
-                stack = temp; 
-            }
-            *(stack + top) = height[index];
+            int left = stk[top - 1];
+            int currWidth = i - left - 1;
+            int currHeight = fmin(height[left], height[i]) - height[stk_top];
+            ans += currWidth * currHeight;
         }
+        stk[top++] = i;
     }
-    if (top < 0)
-        return res;
-
-    int newHeightSize = top + 2;
-    int* newHeight = (int*)malloc(sizeof(int) * (newHeightSize));
-    if (newHeight == NULL)
-        return -1;
-    for (int i = 0; i <= newHeightSize - 2; i++) {
-        newHeight[i] = *(stack + top--);
-    }
-    newHeight[newHeightSize - 1] = left;
-
-    res += (trap(newHeight, newHeightSize));
-    free(newHeight);
-    free(stack);
-    return res;
+    return ans;
 }
 
 /*
@@ -67,6 +43,9 @@ int trap(int* height, int heightSize){
  */
 int main(void)
 {
-    int *i1 = [0,1,0,2,1,0,1,3,2,1,2,1];
-    printf("i1: %d\n", (i1));
+    // int i1[] = {0,1,0,2,1,0,1,3,2,1,2,1};
+    // int i1[] = {4,2,0,3,2,5};
+    int i1[] = {4,2,0,3,2,4,3,4};
+    int size = sizeof(i1) / sizeof(int);
+    printf("i1: %d\n", trap(i1, size));
 }

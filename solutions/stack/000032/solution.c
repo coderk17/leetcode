@@ -14,17 +14,18 @@
 #include <stdlib.h>
 
 int longestValidParentheses(char * s){
-    int maxLegth = 0, index = 0;
+    int maxLength = 0, index = 0;
     int top = -1, stackSize = 10;
     int *stack = (int *) malloc(sizeof(int) * stackSize);
     *(stack + ++top) = -1;
     while (*s) {
         if (top >= stackSize) {
-            int *temp = NULL;
             stackSize *= 2;
-            temp = (int *) realloc(stack, sizeof(int) * stackSize);
-            if (NULL == temp)
+            int* temp = (int *) realloc(stack, sizeof(int) * stackSize);
+            if (NULL == temp) {
+                free(stack);
                 return -1;
+            }
             stack = temp; 
         }
         switch (*s) {
@@ -36,7 +37,7 @@ int longestValidParentheses(char * s){
                 if (top == -1) {
                     *(stack + ++top) = index;
                 } else {
-                    maxLegth = fmax(maxLegth, index - *(stack + top));
+                    maxLength = fmax(maxLength, index - *(stack + top));
                 }
                 break;
             default:
@@ -45,13 +46,14 @@ int longestValidParentheses(char * s){
         s++;
         index++;
     }
-    return maxLegth;
+    free(stack);
+    return maxLength;
 }
 
 
 /*
  * run command:
- * $ gcc ./solutions/stack/000032/solution.c -o bin/stack/000032-solution
+ * $ gcc -lm ./solutions/stack/000032/solution.c -o bin/stack/000032-solution 
  * $ ./bin/stack/000032-solution
  */
 int main(void)
