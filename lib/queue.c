@@ -1,3 +1,4 @@
+// #define DEBUG
 #include "queue.h"
 
 int initialize(Queue *queue, int maxSize) {
@@ -29,7 +30,9 @@ int dequeue(Queue *queue) {
     }
     int val = queue->elements[queue->front++ % queue->maxSize];
     queue->size--;
+#ifdef DEBUG
     printf("dequeue: %d, size: %d \n", val, queue->size);
+#endif
     return val;
 };
 
@@ -41,7 +44,9 @@ int enqueue(Queue *queue, int val) {
     queue->rear++;
     queue->elements[queue->rear % queue->maxSize] = val;
     queue->size++;
+#ifdef DEBUG
     printf("enqueue: %d, size: %d \n", queue->elements[queue->rear % queue->maxSize], queue->size);
+#endif
     return 0;
 };
 
