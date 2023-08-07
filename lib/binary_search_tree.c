@@ -16,6 +16,10 @@ int initializeBST(BinarySearchTreeNode *root, int data[], int size)
 
 int insertBST(BinarySearchTreeNode *node, int val)
 {   
+    if (null == node->element) {
+        node->element = val;
+        return 0;
+    }
     while (NULL != node)
     {
         if (val == node->element) {
@@ -69,22 +73,13 @@ int deleteBST(BinarySearchTreeNode *node, int val)
                 } else {
                     parent->right = NULL;
                 }
-            } else if (NULL == node->left) {
+            } else {
                 if (deleteNodeIsLeft == 1) {
-                    parent->left = node->right;
+                    parent->left = (NULL == node->left ? node->right : node->left);
                 } else {
-                    parent->right = node->right;
-                }
-            } else if (NULL == node->right) {
-                if (deleteNodeIsLeft == 1) {
-                    parent->left = node->left;
-                } else {
-                    parent->right = node->left;
+                    parent->right = (NULL == node->left ? node->right : node->left);
                 }
             }
-            // printf("parent: %d\n", parent->element);
-            // printf("pleft: %d\n", parent->left->element);
-            // printf("pright: %d\n", parent->right->element);
             return 0;
         } else if (val < node->element) {
             parent = node;

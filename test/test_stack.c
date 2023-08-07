@@ -7,18 +7,18 @@ int main()
         printf("malloc memory failed!");
         return -1;
     }
-    initialize(stack, 10);
-    printf("stack is empty? %s\n", isEmpty(stack) ? "Yes": "No");
+    initializeStack(stack, 10);
+    printf("stack is empty? %s\n", stackIsEmpty(stack) ? "Yes": "No");
     for (int i = 0; i < 10; i++) {
         push(stack, i+1);
     }
-    printf("stack is full? %s\n", isFull(stack) ? "Yes": "No");
+    printf("stack is full? %s\n", stackIsFull(stack) ? "Yes": "No");
     for (int i = 0; i < 3; i++) {
         pop(stack);
     }
     for (int i = 10; i < 14; i++) {
         push(stack, i+1);
     }
-    empty(stack);
-    printf("stack is empty? %s\n", isEmpty(stack) ? "Yes": "No");
+    emptyStack(stack);
+    printf("stack is empty? %s\n", stackIsEmpty(stack) ? "Yes": "No");
 }

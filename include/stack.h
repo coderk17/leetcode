@@ -13,11 +13,12 @@ struct Stack {
 
 typedef struct Stack Stack;
 
-int isEmpty(Stack *stack);
-int isFull(Stack *stack);
-int initialize(Stack *stack, int maxSize);
+int stackIsEmpty(Stack *stack);
+int stackIsFull(Stack *stack);
+int initializeStack(Stack *stack, int maxSize);
 int pop(Stack *stack);
 int push(Stack *stack, int val);
-int empty(Stack *stack);
+int emptyStack(Stack *stack);
+int freeStack(Stack *stack);
 
 #endif /* LEETCODE_STACK_H_ */

@@ -1,7 +1,7 @@
 // #define DEBUG
 #include "queue.h"
 
-int initialize(Queue *queue, int maxSize) {
+int initializeQueue(Queue *queue, int maxSize) {
     queue->size = 0;
     queue->front = 0;
     queue->rear = -1;
@@ -15,16 +15,16 @@ int initialize(Queue *queue, int maxSize) {
     return 0;
 }
 
-int isEmpty(Queue *queue) {
+int queueIsEmpty(Queue *queue) {
     return queue->size == 0;
 };
 
-int isFull(Queue *queue) {
+int queueIsFull(Queue *queue) {
     return queue->size == queue->maxSize;
 };
 
 int dequeue(Queue *queue) {
-    if (isEmpty(queue)) {
+    if (queueIsEmpty(queue)) {
         printf("Queue is empty!\n");
         return -1;
     }
@@ -37,7 +37,7 @@ int dequeue(Queue *queue) {
 };
 
 int enqueue(Queue *queue, int val) {
-    if (isFull(queue)) {
+    if (queueIsFull(queue)) {
         printf("Queue is full!\n");
         return -1;
     }
@@ -50,7 +50,7 @@ int enqueue(Queue *queue, int val) {
     return 0;
 };
 
-int empty(Queue *queue) {
+int emptyQueue(Queue *queue) {
     queue->size = 0;
     queue->front = 0;
     queue->rear = -1;

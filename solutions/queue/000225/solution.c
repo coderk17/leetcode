@@ -34,8 +34,8 @@ MyStack* myStackCreate() {
     MyStack *myStack = malloc(sizeof(MyStack));
     myStack->queues[0] = malloc(sizeof(Queue));
     myStack->queues[1] = malloc(sizeof(Queue));
-    initialize(myStack->queues[0], 100);
-    initialize(myStack->queues[1], 100);
+    initializeStack(myStack->queues[0], 100);
+    initializeStack(myStack->queues[1], 100);
     myStack->empty = 0;
     return myStack;
 }
@@ -43,7 +43,7 @@ MyStack* myStackCreate() {
 void myStackPush(MyStack* obj, int x) {
     int empty = obj->empty;
     enqueue(obj->queues[empty], x);
-    while (!isEmpty(obj->queues[1 - empty])) {
+    while (!queueIsEmpty(obj->queues[1 - empty])) {
         int val = dequeue(obj->queues[1 - empty]);
         enqueue(obj->queues[empty], val);
     }

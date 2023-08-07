@@ -15,11 +15,11 @@ struct Queue {
 
 typedef struct Queue Queue;
 
-int isEmpty(Queue *queue);
-int isFull(Queue *queue);
-int initialize(Queue *queue, int maxSize);
+int queueIsEmpty(Queue *queue);
+int queueIsFull(Queue *queue);
+int initializeQueue(Queue *queue, int maxSize);
 int dequeue(Queue *queue);
 int enqueue(Queue *queue, int val);
-int empty(Queue *queue);
+int emptyQueue(Queue *queue);
 
 #endif /* LEETCODE_QUEUE_H_ */ 

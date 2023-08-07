@@ -7,11 +7,11 @@ breadthFirstInitialize(BinaryTreeNode *root, int data[], int size)
     int index = 0;
     int queueMaxSize = pow(2, (int) (log(size) / log(2)));
     Queue *q = (Queue *) malloc(sizeof(Queue));
-    initialize(q, queueMaxSize);
+    initializeQueue(q, queueMaxSize);
     root->left = NULL;
     root->right = NULL;
     enqueue(q, root);
-    while (!isEmpty(q))
+    while (!queueIsEmpty(q))
     {
         BinaryTreeNode *cur = (BinaryTreeNode *) dequeue(q);
         if (NULL == cur) {
@@ -81,9 +81,9 @@ int postorderTraveral(BinaryTreeNode *node)
 int breadthFirstTraveral(BinaryTreeNode *node, int qSize)
 {
     Queue *q = (Queue *) malloc(sizeof(Queue));
-    initialize(q, qSize);
+    initializeQueue(q, qSize);
     enqueue(q, node);
-    while (!isEmpty(q))
+    while (!queueIsEmpty(q))
     {
         BinaryTreeNode *cur = (BinaryTreeNode *) dequeue(q);
         if (NULL == cur || null == cur->element) {
