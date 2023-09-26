@@ -41,7 +41,7 @@ BTreeNode * _createBTreeNode(int *keys, BTreeNode **children, int index, int len
 BTreeNode * _splitBTreeNode(BTreeNode *node, int maxKeyNum)
 {
     int m = maxKeyNum + 1;
-    int splitIndex = ceil(m / 2) - 1;
+    int splitIndex = ceil(m / 2.0) - 1;
 
     int leftLength = splitIndex;
     int rightLength = maxKeyNum - leftLength;
@@ -52,11 +52,11 @@ BTreeNode * _splitBTreeNode(BTreeNode *node, int maxKeyNum)
     BTreeNode *leftNode = _createBTreeNode(node->keys, node->children, leftIndex, leftLength, maxKeyNum);
     BTreeNode *rightNode = _createBTreeNode(node->keys, node->children, rightIndex, rightLength, maxKeyNum);
     BTreeNode *newNode = _createBTreeNode(node->keys, NULL, splitIndex, 1, maxKeyNum);
-    _freeBTreeNode(node, false);
     newNode->children = (BTreeNode **) calloc(m + 1, sizeof(BTreeNode *));
     *(newNode->children) = leftNode;
     *(newNode->children + 1) = rightNode;
     newNode->isLeaf = false;
+    _freeBTreeNode(node, false);
     return newNode;
 }
 
@@ -169,7 +169,7 @@ int _deleteBTreeNode(BTreeNode *node, int val, int m)
     int deleteRes = 0;
     int i = 0;
     int keyNum = node->keyNum;
-    int minKeyNum = ceil(m / 2) - 1;
+    int minKeyNum = ceil(m / 2.0) - 1;
     while (i < keyNum && *(node->keys + i) < val) {
         i++;
     }
@@ -284,6 +284,7 @@ BTreeNode * searchBTree(BTree *btree, int val)
         } else {
             return node;
         }
+        i = 0;
     }
     return NULL;
 }

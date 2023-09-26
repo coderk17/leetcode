@@ -3,14 +3,18 @@
 
 int main()
 {
+    long seed = time(NULL);
+    srand(seed);
+
     int vals[] = {6, 10, 4, 14, 5, 11, 15, 3, 2, 12, 1, 7, 8, 8, 6, 3, 6, 21, 5, 15, 15, 6, 32, 23, 45, 65, 7, 8, 6, 5, 4};
     int dataSize = sizeof(vals) / sizeof(int);
 
-    int m = 4;
+    int m = seed % dataSize + 3;
     BTree *btree = createBTree(m);
 
     for (int i = 0; i < dataSize; i++) {
         insertBTree(btree, vals[i]);
+        printBTree(btree);
     }
     puts("=============");
     printBTree(btree);
@@ -66,14 +70,8 @@ int main()
     // deleteBTree(btree, 23);
     // printBTree(btree);
 
-    // deleteBTree(btree, 5);
-    // deleteBTree(btree, 5);
-    // printBTree(btree);
-    // return 0;
-
     int deleteRes = 0;
-    long seed = time(NULL);
-    srand(seed);
+
     for (int i = 0; i < 100; i++) {
         int r1 = rand() % dataSize;
         int r2 = rand() % dataSize;
@@ -81,7 +79,6 @@ int main()
         vals[r1] = vals[r2];
         vals[r2] = tmp;
     }
-    printBTree(btree);
     for (int i = 0; i < dataSize; i++) {
         printf("delete val: %d, %d\n", i, vals[i]);
         puts("=============");
@@ -91,5 +88,6 @@ int main()
         }
         printBTree(btree);
     }
+    printBTree(btree);
     freeBTree(btree);
 }
