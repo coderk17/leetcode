@@ -1,2 +1,2 @@
 # leetcode
-LeetCode C Solution.
+LeetCode C Solutions.
