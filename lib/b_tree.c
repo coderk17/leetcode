@@ -22,7 +22,6 @@ int _freeBTreeNode(BTreeNode *node, bool isFreeChildren)
 BTreeNode * _createBTreeNode(int *keys, BTreeNode **children, int index, int length, int maxKeyNum)
 {
     BTreeNode *node = (BTreeNode *) malloc(sizeof(BTreeNode));
-    node->isLeaf = true;
     node->keys = (int *) malloc(sizeof(int) * (maxKeyNum + 1));
     node->children = NULL;
     node->keyNum = length;
@@ -55,7 +54,6 @@ BTreeNode * _splitBTreeNode(BTreeNode *node, int maxKeyNum)
     newNode->children = (BTreeNode **) calloc(m + 1, sizeof(BTreeNode *));
     *(newNode->children) = leftNode;
     *(newNode->children + 1) = rightNode;
-    newNode->isLeaf = false;
     _freeBTreeNode(node, false);
     return newNode;
 }
@@ -71,7 +69,7 @@ BTreeNode * _insertBTreeNode(BTreeNode *node, BTreeNode *insertNode, int maxKeyN
     }
     if (node->children) {
         BTreeNode *resNode = _insertBTreeNode(*(node->children + i), insertNode, maxKeyNum);
-        if (!resNode->isLeaf) {
+        if (resNode != *(node->children + i)) {
             val = *(resNode->keys);
 
             for (int k = keyNum; k >= i; k--) {

@@ -8,7 +8,6 @@
 
 struct BTreeNode {
     int keyNum;
-    bool isLeaf;
     int *keys;
     struct BTreeNode **children;
 };

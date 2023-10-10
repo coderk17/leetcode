@@ -1,5 +1,6 @@
-#include "b_tree.h"
 #include <time.h>
+
+#include "b_tree.h"
 
 int main()
 {
