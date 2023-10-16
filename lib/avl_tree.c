@@ -127,14 +127,18 @@ AVLTreeNode * deleteAVL(AVLTreeNode *root, int val)
             oriDeleteNode->element = leftMax;
             return root;
         } else if (NULL != root->left) {
-            AVLTreeNode * rootLeft = root->left;
+            AVLTreeNode *rootLeft = root->left;
             free(root);
+            root = NULL;
             return rootLeft;
         } else if (NULL != root->right) {
-            AVLTreeNode * rootRight = root->right;
+            AVLTreeNode *rootRight = root->right;
             free(root);
+            root = NULL;
             return rootRight;
         } else {
+            free(root);
+            root = NULL;
             return NULL;
         }
     }
@@ -183,6 +187,8 @@ int freeAVL (AVLTreeNode *root)
     freeAVL(root->left);
     freeAVL(root->right);
     free(root);
+    root = NULL;
+    return 0;
 }
 
 int breadthFirstTraveral(AVLTreeNode *node, int qSize)
@@ -200,5 +206,6 @@ int breadthFirstTraveral(AVLTreeNode *node, int qSize)
         enqueue(q, cur->left);
         enqueue(q, cur->right);
     }
+    freeQueue(q);
     return 0;
 }

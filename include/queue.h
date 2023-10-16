@@ -21,5 +21,6 @@ int initializeQueue(Queue *queue, int maxSize);
 int dequeue(Queue *queue);
 int enqueue(Queue *queue, int val);
 int emptyQueue(Queue *queue);
+int freeQueue(Queue *queue);
 
 #endif /* LEETCODE_QUEUE_H_ */ 

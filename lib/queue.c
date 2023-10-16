@@ -56,3 +56,11 @@ int emptyQueue(Queue *queue) {
     queue->rear = -1;
     return 0;
 };
+
+int freeQueue(Queue *queue)
+{
+    free(queue->elements);
+    queue->elements = NULL;
+    free(queue);
+    queue = NULL;
+}
