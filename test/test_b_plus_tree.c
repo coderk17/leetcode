@@ -11,7 +11,6 @@ int main()
     int dataSize = sizeof(vals) / sizeof(int);
 
     int m = seed % dataSize + 3;
-    m = 3;
     BPlusTree *bPlusTree = createBPlusTree(m);
 
     for (int i = 0; i < dataSize; i++) {
@@ -103,7 +102,6 @@ int main()
         }
         printBPlusTree(bPlusTree);
     }
-    printBPlusTree(bPlusTree);
     freeBPlusTree(bPlusTree);
     printf("m: %d\n", m);
 }

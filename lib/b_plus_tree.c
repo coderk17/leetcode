@@ -3,7 +3,6 @@
 int _freeBPlusTreeNode(BPlusTreeNode *node, bool isFreeChildren)
 {
     int keyNum = node->keyNum;
-    printf("free don't include children: %p, %p\n", node->keys, node);
     free(node->keys);
     node->keys = NULL;
     if (node->children) {
@@ -77,6 +76,7 @@ BPlusTreeNode * _insertBPlusTreeNode(BPlusTreeNode *node, BPlusTreeNode *insertN
     }
     if (node->children) {
         BPlusTreeNode *insertChild = *(node->children + i);
+        BPlusTreeNode *oldChildNext = (*(node->children + i))->next;
         BPlusTreeNode *resNode = _insertBPlusTreeNode(insertChild, insertNode, maxKeyNum);
         if (resNode != insertChild) {
             val = *(resNode->keys);
@@ -90,9 +90,9 @@ BPlusTreeNode * _insertBPlusTreeNode(BPlusTreeNode *node, BPlusTreeNode *insertN
             } else {
                 fprintf(stderr, "resNode data error: %p\n", resNode);
             }
-            if (!insertChild->children) {
+            if (!(*(node->children + i))->children) {
                 (*(node->children + i))->next = *(node->children + i + 1);
-                (*(node->children + i + 1))->next = insertChild->next;
+                (*(node->children + i + 1))->next = oldChildNext;
                 if (i > 0) {
                     (*(node->children + i - 1))->next = *(node->children + i);
                 }
@@ -147,33 +147,39 @@ int _rebalance(BPlusTreeNode *node, int i, int minKeyNum)
         BPlusTreeNode *leftChildNode = i > 0 ? *(node->children + i - 1) : NULL;
         BPlusTreeNode *rightChildNode = i < node->keyNum ? *(node->children + i + 1) : NULL;
         if (leftChildNode && leftChildNode->keyNum > minKeyNum) {
+            int nodeVal = *(node->keys + i - 1);
+            *(node->keys + i - 1) = *(leftChildNode->keys + (leftChildNode->keyNum - 1));
             for (int j = deleteChildNode->keyNum; j > 0; j--) {
                 *(deleteChildNode->keys + j) = *(deleteChildNode->keys + j - 1);
             }
-            // *(deleteChildNode->keys) = *(node->keys + i - 1);
             if (leftChildNode->children) {
+                *(deleteChildNode->keys) = nodeVal;
                 for (int j = deleteChildNode->keyNum + 1; j > 0; j--) {
                     *(deleteChildNode->children + j) = *(deleteChildNode->children + j - 1);
                 }
                 *(deleteChildNode->children) = *(leftChildNode->children + leftChildNode->keyNum);
+            } else {
+                *(deleteChildNode->keys) = *(node->keys + i - 1);
             }
+            leftChildNode->keyNum--;
             deleteChildNode->keyNum++;
-            *(node->keys + i - 1) = *(leftChildNode->keys + --leftChildNode->keyNum);
-            *(deleteChildNode->keys) = *(node->keys + i - 1);
         } else if (rightChildNode && rightChildNode->keyNum > minKeyNum) {
-            // *(deleteChildNode->keys + deleteChildNode->keyNum++) = *(node->keys + i);
+            int nodeVal = *(node->keys + i);
             *(node->keys + i) = *(rightChildNode->keys);
-            *(deleteChildNode->keys + deleteChildNode->keyNum++) = *(node->keys + i);
             for (int j = 0; j < rightChildNode->keyNum - 1; j++) {
                 *(rightChildNode->keys + j) = *(rightChildNode->keys + j + 1);
             }
             if (rightChildNode->children) {
-                *(deleteChildNode->children + deleteChildNode->keyNum) = *(rightChildNode->children);
+                *(deleteChildNode->keys + deleteChildNode->keyNum) = nodeVal;
+                *(deleteChildNode->children + (deleteChildNode->keyNum + 1)) = *(rightChildNode->children);
                 for (int j = 0; j < rightChildNode->keyNum; j++) {
                     *(rightChildNode->children + j) = *(rightChildNode->children + j + 1);
                 }
+            } else {
+                *(deleteChildNode->keys + deleteChildNode->keyNum) = *(node->keys + i);
             }
             rightChildNode->keyNum--;
+            deleteChildNode->keyNum++;
         } else {
             BPlusTreeNode *mergeNode = leftChildNode ? leftChildNode : deleteChildNode;
             BPlusTreeNode *moveNode = leftChildNode ? deleteChildNode : rightChildNode;
@@ -322,11 +328,13 @@ BPlusTreeNode * searchBPlusTree(BPlusTree *bPlusTree, int val)
     return searchRes;
 }
 
-int freeBPlusTree(BPlusTree *btree)
+int freeBPlusTree(BPlusTree *bPlustree)
 {
-    if (btree->root) {
-        _freeBPlusTreeNode(btree->root, true);
+    if (bPlustree->root) {
+        _freeBPlusTreeNode(bPlustree->root, true);
     }
+    free(bPlustree);
+    bPlustree = NULL;
     return 0;
 }
 

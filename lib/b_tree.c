@@ -292,6 +292,8 @@ int freeBTree(BTree *btree)
     if (btree->root) {
         _freeBTreeNode(btree->root, true);
     }
+    free(btree);
+    btree = NULL;
     return 0;
 }
 
