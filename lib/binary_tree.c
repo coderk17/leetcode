@@ -1,6 +1,4 @@
-#include <math.h>
 #include "binary_tree.h"
-#include "queue.h"
 
 breadthFirstInitialize(BinaryTreeNode *root, int data[], int size)
 {
@@ -36,6 +34,7 @@ breadthFirstInitialize(BinaryTreeNode *root, int data[], int size)
         enqueue(q, cur->left);
         enqueue(q, cur->right);
     }
+    freeQueue(q);
     return 0;
 }
 
@@ -93,6 +92,7 @@ int breadthFirstTraveral(BinaryTreeNode *node, int qSize)
         enqueue(q, cur->left);
         enqueue(q, cur->right);
     }
+    freeQueue(q);
     return 0;
 }
 
@@ -103,4 +103,5 @@ int postorderFree(BinaryTreeNode *node)
     postorderFree(node->left);
     postorderFree(node->right);
     free(node);
+    node = NULL;
 }
