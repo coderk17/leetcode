@@ -122,25 +122,36 @@ AVLTreeNode * deleteAVL(AVLTreeNode *root, int val)
                 node = node->right;
             }
             int leftMax = node->element;
-            AVLTreeNode *oriDeleteNode = root;
-            root = deleteAVL(root, leftMax);
-            oriDeleteNode->element = leftMax;
-            return root;
+            int realDelete = leftMax;
+            AVLTreeNode *oriRoot = root;
+            if (node->right) {
+                realDelete = node->right->element;
+                root = deleteAVL(root, realDelete);
+                node->element = realDelete;
+            }
+            else {
+                root = deleteAVL(root, leftMax);
+            }
+            oriRoot->element = leftMax;
         } else if (NULL != root->left) {
             AVLTreeNode *rootLeft = root->left;
-            free(root);
-            root = NULL;
-            return rootLeft;
+            root->element = rootLeft->element;
+            root->right = rootLeft->right;
+            root->left = rootLeft->left;
+            free(rootLeft);
+            rootLeft = NULL;
         } else if (NULL != root->right) {
             AVLTreeNode *rootRight = root->right;
-            free(root);
-            root = NULL;
-            return rootRight;
+            root->element = rootRight->element;
+            root->left = rootRight->left;
+            root->right = rootRight->right;
+            free(rootRight);
+            rootRight = NULL;
         } else {
             free(root);
             root = NULL;
-            return NULL;
         }
+        return root;
     }
     root->height = _height(root);
     int balance = _balance(root);

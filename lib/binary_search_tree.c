@@ -66,8 +66,13 @@ int deleteBST(BinarySearchTreeNode *node, int val)
                     tmp = tmp->left;
                 }
                 node->element = tmp->element;
-                free(pre->left);
-                pre->left = NULL;
+                if (tmp->right) {
+                    pre->left = tmp->right;
+                } else {
+                    pre->left = NULL;
+                }
+                free(tmp);
+                tmp = NULL;
             } else if (NULL == node->left && NULL == node->right) {
                 free(node);
                 node = NULL;
